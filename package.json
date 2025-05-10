@@ -13,9 +13,9 @@
     "dotenv": "^16.5.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.43.1",
+    "fs": "^0.0.1-security",
     "next": "15.3.2",
     "pg": "^8.15.6",
-    "postgres": "^3.4.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
