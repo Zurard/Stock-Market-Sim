@@ -6,6 +6,7 @@ import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 
+
 export async function addUser(email: string, userId: string, created_at: Date) {
   // Check if the user already exists in the database
   const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1);
