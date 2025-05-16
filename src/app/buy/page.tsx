@@ -12,7 +12,7 @@ export default function Buy() {
 
      const searchParams = useSearchParams();
      const userId = searchParams.get("userId");
-
+      console.log("User ID:", userId);
     const stockList = [
         { symbol: 'AAPL', companyName: 'Apple Inc.' },
         { symbol: 'MSFT', companyName: 'Microsoft Corporation' },
@@ -63,7 +63,10 @@ export default function Buy() {
       pricePerUnit: price,
     });
     console.log("Transaction added successfully");
-    // optionally reset form fields here
+    setSelectedStock('');
+    setQuantity(0);
+    setPrice(0);
+    window.alert("Stock purchased successfully!");
   } catch (error) {
     console.error("Error adding transaction:", error);
   }

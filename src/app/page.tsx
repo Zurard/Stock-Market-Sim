@@ -41,7 +41,7 @@ export default function Home() {
   }
 
   const userId = user.id;
-
+  console.log("User ID:", userId);
   return (
     <main className="flex min-h-screen flex-col items-center justify-items-center p-24">
       <p className="font-semibold text-7xl mb-3">Welcome to Stock - Market</p>
