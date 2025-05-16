@@ -1,21 +1,15 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-
-export default function Dashboard() {
-    const router = useRouter();
+export default function Dashboard(userid:string) {
+    const searchParams = useSearchParams();
+    const userId = searchParams.get("userId");
+    // const router = useRouter();
     const [stocks, setStocks] = useState<any>(null);
     const [error, setError] = useState<string | null>(null); // Optional: Add error state
-
-    const buyStock = () => {
-        router.push("/buy");
-    }
-
-    const sellStock = () => {
-        router.push("/sell");
-    }
-
 
 
 //   CODE BLOK ON HOW TO FETCH DATA FROM ALPHA VANTAGE API ===========>>>===========>>>
@@ -71,18 +65,22 @@ export default function Dashboard() {
             <div className="flex max-h-screen flex-col items-center justify-items-center p-10">
              Ready to start your stock trading journey? 
              <div>
+                <Link href={`/buy?userId=${userId}`}>
                 <button
-                    onClick={buyStock}
+                    
                     className="border border-white rounded-2xl px-3 py-1 mt-5 hover:cursor-pointer"
                 >
                     Buy a Stock
                 </button>
+                </Link>
+               <Link href={`/sell?userId=${userId}`}>
                 <button
-                    onClick={sellStock}
+                    
                     className="border border-white rounded-2xl px-3 py-1 mt-5 hover:cursor-pointer"
                 >
-                    Sell a Stock
+                    Buy a Stock
                 </button>
+                </Link>
              </div>
             </div>
 

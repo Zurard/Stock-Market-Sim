@@ -1,12 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StockDetails from '../components/stockDetails';
+import { useSearchParams } from "next/navigation";
+import { buyStock } from '@/lib/actions/transactions';
 
 export default function Buy() {
     const [selectedStock, setSelectedStock] = useState('');
     const [quantity, setQuantity] = useState<number>(0);
     const [price, setPrice] = useState<number>(0);
+
+     const searchParams = useSearchParams();
+     const userId = searchParams.get("userId");
 
     const stockList = [
         { symbol: 'AAPL', companyName: 'Apple Inc.' },
@@ -42,6 +47,27 @@ export default function Buy() {
   };
 
   const totalAmount = (quantity && price) ? (quantity * price).toFixed(2) : '0.00';
+
+
+  const handleBuyStock = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedStock || !quantity || !price) {
+      alert("Please select a stock, enter quantity, and fetch the price.");
+      return;
+    }
+     try {
+    buyStock({
+      userId: userId as string,
+      stockSymbol: selectedStock,
+      quantityToBuy: quantity,
+      pricePerUnit: price,
+    });
+    console.log("Transaction added successfully");
+    // optionally reset form fields here
+  } catch (error) {
+    console.error("Error adding transaction:", error);
+  }
+  };
 
   return (
     <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
@@ -88,6 +114,7 @@ export default function Buy() {
         />
 
         <button
+          onClick={handleBuyStock}
           type="submit"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors mt-2"
         >

@@ -47,5 +47,5 @@ export const transactions = pgTable("transactions", {
   quantity: integer("quantity").notNull(),
   pricePerUnit: numeric("price_per_unit").notNull(),
   totalAmount: numeric("total_amount").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),  
 });
