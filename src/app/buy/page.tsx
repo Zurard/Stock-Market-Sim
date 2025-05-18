@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import StockDetails from '../components/stockDetails';
 import { useSearchParams } from "next/navigation";
 import { buyStock } from '@/lib/actions/transactions';
+import { useRouter } from 'next/navigation';
 
 export default function Buy() {
     const [selectedStock, setSelectedStock] = useState('');
@@ -13,6 +14,9 @@ export default function Buy() {
      const searchParams = useSearchParams();
      const userId = searchParams.get("userId");
       console.log("User ID:", userId);
+
+    const router = useRouter();
+
     const stockList = [
         { symbol: 'AAPL', companyName: 'Apple Inc.' },
         { symbol: 'MSFT', companyName: 'Microsoft Corporation' },
@@ -67,6 +71,7 @@ export default function Buy() {
     setQuantity(0);
     setPrice(0);
     window.alert("Stock purchased successfully!");
+    router.push('/dashboard');
   } catch (error) {
     console.error("Error adding transaction:", error);
   }
